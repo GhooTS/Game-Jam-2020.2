@@ -58,3 +58,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# resource folder
+/[Aa]ssets/[Rr]esource/
+[Rr]esource.meta
+
