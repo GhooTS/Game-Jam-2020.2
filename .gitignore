@@ -59,6 +59,6 @@ sysinfo.txt
 crashlytics-build.properties
 
 # resource folder
-/[Aa]ssets/[Rr]esource/
-[Rr]esource.meta
+#/[Aa]ssets/[Rr]esource/
+#[Rr]esource.meta
 
