@@ -29,7 +29,7 @@ jobs:
       - name: Run tests
         uses: webbertakken/unity-test-runner@v1.4
         with:
-          unityVersion: 2019.3.0f6
+          unityVersion: 2019.4.5f1
 
       # Build
       - name: Build project
@@ -46,7 +46,7 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BASE_BRANCH: master # The branch the action should deploy from.
           BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: build # The folder the action should deploy.
+          FOLDER: build/WebGL # The folder the action should deploy.
           SINGLE_COMMIT: true
       
       # Output 
