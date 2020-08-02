@@ -6,6 +6,6 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _Character Animator
-  m_Controller: {fileID: 9100000, guid: a3c27b3edc7c7dd49aa745bbedc2eed1, type: 2}
+  m_Name: Light Animator
+  m_Controller: {fileID: 9100000, guid: 7e61a45f6dc0d1141a21c474a267d26f, type: 2}
   m_Clips: []

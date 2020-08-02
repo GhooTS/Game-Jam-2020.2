@@ -2,14 +2,18 @@
 using System.Collections;
 
 [RequireComponent (typeof (Controller2D))]
-public class Player : MonoBehaviour {
-
+public class Player : MonoBehaviour 
+{
+	[Min(0)]
+	public int maxJump = 2;
 	public float maxJumpHeight = 4;
 	public float minJumpHeight = 1;
 	public float timeToJumpApex = .4f;
-	float accelerationTimeAirborne = .2f;
-	float accelerationTimeGrounded = .1f;
-	float moveSpeed = 6;
+	[Range(0f,.2f)]
+	public float accelerationTimeAirborne = .02f;
+	[Range(0f,.1f)]
+	public float accelerationTimeGrounded = .01f;
+	public float moveSpeed = 6;
 
 	public Vector2 wallJumpClimb;
 	public Vector2 wallJumpOff;
@@ -17,8 +21,30 @@ public class Player : MonoBehaviour {
 
 	public float wallSlideSpeedMax = 3;
 	public float wallStickTime = .25f;
+
+	public bool Falling 
+	{ 
+		get 
+		{
+			return controller.collisions.below == false && velocity.y < 0;
+		} 
+	}
+
+	public bool Jumping
+    {
+		get
+		{
+			return controller.collisions.below == false && velocity.y > 0;
+		}
+	}
+
+	public float MoveSpeed{ get; private set; }
+
+
+
 	float timeToWallUnstick;
 
+	int jumpCount = 0;
 	float gravity;
 	float maxJumpVelocity;
 	float minJumpVelocity;
@@ -39,11 +65,12 @@ public class Player : MonoBehaviour {
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (gravity) * minJumpHeight);
 	}
 
-	void Update() {
+	void FixedUpdate() {
 		CalculateVelocity ();
 		HandleWallSliding ();
 
-		controller.Move (velocity * Time.deltaTime, directionalInput);
+		controller.Move (velocity * Time.fixedDeltaTime, directionalInput);
+
 
 		if (controller.collisions.above || controller.collisions.below) {
 			if (controller.collisions.slidingDownMaxSlope) {
@@ -52,6 +79,13 @@ public class Player : MonoBehaviour {
 				velocity.y = 0;
 			}
 		}
+
+        if (controller.collisions.below)
+        {
+			jumpCount = 0;
+        }
+
+		MoveSpeed = velocity.x == 0f ? 0 : velocity.magnitude * Mathf.Sign(velocity.x);
 	}
 
 	public void SetDirectionalInput (Vector2 input) {
@@ -73,14 +107,17 @@ public class Player : MonoBehaviour {
 				velocity.y = wallLeap.y;
 			}
 		}
-		if (controller.collisions.below) {
+		if (controller.collisions.below || jumpCount < maxJump) {
 			if (controller.collisions.slidingDownMaxSlope) {
 				if (directionalInput.x != -Mathf.Sign (controller.collisions.slopeNormal.x)) { // not jumping against max slope
 					velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
 					velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
 				}
-			} else {
+				jumpCount++;
+			}
+			else {
 				velocity.y = maxJumpVelocity;
+				jumpCount++;
 			}
 		}
 	}
