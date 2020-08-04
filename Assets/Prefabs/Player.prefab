@@ -20,9 +20,13 @@ GameObject:
   - component: {fileID: 5849347603166592540}
   - component: {fileID: 6517115428852228221}
   - component: {fileID: 265729602}
+  - component: {fileID: 9200097170970389332}
+  - component: {fileID: 6592503484545921547}
+  - component: {fileID: 9067502111144186936}
+  - component: {fileID: 7738746842760251915}
   m_Layer: 5
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -341,7 +345,18 @@ MonoBehaviour:
     m_ActionId: 54c09e4d-1161-4860-8933-04d9754f4b46
     m_ActionName: PlayerInputs/Attack[/Mouse/leftButton,/Keyboard/f]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9200097170970389332}
+        m_MethodName: Interact
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d3784eb1-ac6b-4663-aba0-f526240ea000
     m_ActionName: PlayerInputs/Interact[/Keyboard/e]
   - m_PersistentCalls:
@@ -372,3 +387,132 @@ MonoBehaviour:
   m_DefaultActionMap: PlayerInputs
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &9200097170970389332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5849347603166592485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eecb806645d6df4eb54f8a60241b91e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionObjectName: 
+  interactionMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  interactionRadius: 1.5
+  onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
+  onInteractionChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onInteractionLost:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6592503484545921547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5849347603166592485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 516af55a91020a043baa6c4c37a352dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listenerName: On time run out kill player
+  listenerDescription: 
+  gameEvents:
+  - {fileID: 11400000, guid: 3f4f7bba393993c4883810bb26e8edb7, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9067502111144186936}
+        m_MethodName: Kill
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Damage
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &9067502111144186936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5849347603166592485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e2d558d9bac8847b92061be97c2c5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP:
+    useConstant: 1
+    constantValue: 0
+    variable: {fileID: 0}
+  MaxHP:
+    useConstant: 1
+    constantValue: 1
+    variable: {fileID: 0}
+  OnDamaged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5849347603166592542}
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Damage
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: c2bf7d3c3ee9c904784190b9bc8d1e87, type: 2}
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 40f2e3c1f5daae24cbc9ba088fc75b66, type: 2}
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7738746842760251915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5849347603166592485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0171b0811c4184ba3ec5e3f331704c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 5849347603166592542}
+  health: {fileID: 9067502111144186936}
