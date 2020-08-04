@@ -32,10 +32,6 @@ public class CharacterController2D : MonoBehaviour
 	{ 
 		get 
 		{
-            if (controller.collisions.fallingThroughPlatform)
-            {
-				Debug.Log(velocity.y);
-            }
 			return (controller.collisions.below == false || controller.collisions.fallingThroughPlatform) && velocity.y < 0;
 		} 
 	}
@@ -83,7 +79,7 @@ public class CharacterController2D : MonoBehaviour
 
 		if (Immobilaze) 
 		{
-			velocity = Vector3.zero; 
+			velocity = Grounded ? Vector3.zero : new Vector3(0, Mathf.Min(0,velocity.y), velocity.z);
 		}
 		Velocity = velocity;
 
