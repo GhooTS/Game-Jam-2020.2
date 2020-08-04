@@ -2,19 +2,24 @@
 using System.Collections;
 
 [RequireComponent (typeof (Controller2D))]
-public class Player : MonoBehaviour 
+public class CharacterController2D : MonoBehaviour 
 {
-	[Min(0)]
-	public int maxJump = 2;
-	public float maxJumpHeight = 4;
-	public float minJumpHeight = 1;
-	public float timeToJumpApex = .4f;
+	
+	[Header("Movement")]
 	[Range(0f,.2f)]
 	public float accelerationTimeAirborne = .02f;
 	[Range(0f,.1f)]
 	public float accelerationTimeGrounded = .01f;
 	public float moveSpeed = 6;
 
+	[Header("Jumping")]
+	[Min(0)]
+	public int maxJump = 2;
+	public float maxJumpHeight = 4;
+	public float minJumpHeight = 1;
+	public float timeToJumpApex = .4f;
+
+	[Header("Wall Jumping")]
 	public Vector2 wallJumpClimb;
 	public Vector2 wallJumpOff;
 	public Vector2 wallLeap;
@@ -22,14 +27,18 @@ public class Player : MonoBehaviour
 	public float wallSlideSpeedMax = 3;
 	public float wallStickTime = .25f;
 
+	public bool Grounded { get { return controller.collisions.below && controller.collisions.fallingThroughPlatform == false; } }
 	public bool Falling 
 	{ 
 		get 
 		{
-			return controller.collisions.below == false && velocity.y < 0;
+            if (controller.collisions.fallingThroughPlatform)
+            {
+				Debug.Log(velocity.y);
+            }
+			return (controller.collisions.below == false || controller.collisions.fallingThroughPlatform) && velocity.y < 0;
 		} 
 	}
-
 	public bool Jumping
     {
 		get
@@ -38,7 +47,8 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	public float MoveSpeed{ get; private set; }
+	public Vector2 Velocity{ get; private set; }
+	public bool Immobilaze { get; set; }
 
 
 
@@ -66,15 +76,23 @@ public class Player : MonoBehaviour
 	}
 
 	void FixedUpdate() {
+
 		CalculateVelocity ();
 		HandleWallSliding ();
+
+
+		if (Immobilaze) 
+		{
+			velocity = Vector3.zero; 
+		}
+		Velocity = velocity;
 
 		controller.Move (velocity * Time.fixedDeltaTime, directionalInput);
 
 
 		if (controller.collisions.above || controller.collisions.below) {
 			if (controller.collisions.slidingDownMaxSlope) {
-				velocity.y += controller.collisions.slopeNormal.y * -gravity * Time.deltaTime;
+				velocity.y += controller.collisions.slopeNormal.y * -gravity * Time.fixedDeltaTime;
 			} else {
 				velocity.y = 0;
 			}
@@ -85,7 +103,6 @@ public class Player : MonoBehaviour
 			jumpCount = 0;
         }
 
-		MoveSpeed = velocity.x == 0f ? 0 : velocity.magnitude * Mathf.Sign(velocity.x);
 	}
 
 	public void SetDirectionalInput (Vector2 input) {

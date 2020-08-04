@@ -1,24 +1,40 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 using System.Collections;
+using UnityEngine.InputSystem.Controls;
 
-[RequireComponent (typeof (Player))]
+[RequireComponent (typeof (CharacterController2D))]
 public class PlayerInput : MonoBehaviour {
 
-	Player player;
+	CharacterController2D player;
+	private Vector2 directionalInput;
 
 	void Start () {
-		player = GetComponent<Player> ();
+		player = GetComponent<CharacterController2D> ();
 	}
 
 	void Update () {
-		Vector2 directionalInput = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 		player.SetDirectionalInput (directionalInput);
-
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			player.OnJumpInputDown ();
-		}
-		if (Input.GetKeyUp (KeyCode.Space)) {
-			player.OnJumpInputUp ();
-		}
 	}
+
+
+	public void GetMoveDirection(InputAction.CallbackContext ctx)
+    {
+		directionalInput = ctx.ReadValue<Vector2>();
+    }
+
+	public void Jump(InputAction.CallbackContext ctx)
+    {
+		var control = ctx.control as ButtonControl;
+
+		
+        if (ctx.phase == InputActionPhase.Started && control.wasPressedThisFrame)
+        {
+			player.OnJumpInputDown();
+        }
+		if(ctx.phase == InputActionPhase.Canceled && control.wasReleasedThisFrame)
+        {
+			player.OnJumpInputUp();
+        }
+    }
 }
