@@ -14,6 +14,8 @@ public class MoveAnimationController : MonoBehaviour
     private int fall;
     private int grounded;
     private int attack;
+    private int dead;
+    private int flip;
 
 
     private void Start()
@@ -23,11 +25,15 @@ public class MoveAnimationController : MonoBehaviour
         fall = Animator.StringToHash("Fall");
         grounded = Animator.StringToHash("Grounded");
         attack = Animator.StringToHash("Attack");
+        dead = Animator.StringToHash("Dead");
+        flip = Animator.StringToHash("Flip");
     }
 
 
     private void Update()
     {
+        player.Immobilaze = true;
+        if (animator.GetBool(dead)) return;
 
         animator.SetBool(fall, player.Falling);
         animator.SetBool(jump, player.Jumping);
@@ -36,6 +42,7 @@ public class MoveAnimationController : MonoBehaviour
         player.Immobilaze = animator.GetCurrentAnimatorStateInfo(0).tagHash == attack;
 
         if(player.Velocity.x != 0) characterRenderer.flipX = Mathf.Sign(player.Velocity.x) == -1f;
+        animator.SetBool(flip, characterRenderer.flipX);
     }
 
 
