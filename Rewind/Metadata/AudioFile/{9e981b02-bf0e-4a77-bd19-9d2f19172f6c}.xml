@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{9e981b02-bf0e-4a77-bd19-9d2f19172f6c}">
+		<property name="assetPath">
+			<value>443293__deathscyp__wood-break.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.86328798185941047</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{35e4adf0-7422-44e3-9766-3eb460c9a564}</destination>
+		</relationship>
+	</object>
+</objects>

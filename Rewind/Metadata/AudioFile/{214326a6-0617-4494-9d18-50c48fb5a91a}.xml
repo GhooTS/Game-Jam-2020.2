@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{214326a6-0617-4494-9d18-50c48fb5a91a}">
+		<property name="assetPath">
+			<value>Footsteps/422755__kierankeegan__footsteps-stone-3.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.65293749999999995</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{35e4adf0-7422-44e3-9766-3eb460c9a564}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="EncodableAsset" id="{36fc5030-71b4-4168-95a2-4d04bb268292}">
+		<property name="assetPath">
+			<value>Jump/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{35e4adf0-7422-44e3-9766-3eb460c9a564}</destination>
+		</relationship>
+	</object>
+</objects>
