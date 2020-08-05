@@ -76,7 +76,7 @@ MonoBehaviour:
   - Platform: 20
     Value: 32
   Plugins:
-  - HTML5
+  - 
   MasterBanks:
   - Master
   Banks: []
