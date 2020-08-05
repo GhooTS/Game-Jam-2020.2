@@ -21,7 +21,7 @@ public class TimeEventTrigger : MonoBehaviour
     {
         for (int i = 0; i < timeEvents.Length; i++)
         {
-            timeEvents[i].Invoke();
+            timeEvents[i].Invoke(maxTime.value - timeLeft.value);
         }
     }
 

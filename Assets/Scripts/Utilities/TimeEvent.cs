@@ -7,9 +7,9 @@ public class TimeEvent
     public UnityEvent onTimePass;
     public bool wasInvoke = false;
 
-    public void Invoke()
+    public void Invoke(float timePassed)
     {
-        if (wasInvoke == false)
+        if (wasInvoke == false && timePassed > timeToPass)
         {
             onTimePass?.Invoke();
             wasInvoke = true;
