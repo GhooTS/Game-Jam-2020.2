@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
 [RequireComponent (typeof (Controller2D))]
 public class CharacterController2D : MonoBehaviour 
@@ -27,7 +28,12 @@ public class CharacterController2D : MonoBehaviour
 	public float wallSlideSpeedMax = 3;
 	public float wallStickTime = .25f;
 
+	[Header("Events")]
+	public UnityEvent onJump;
+	public UnityEvent onLand;
+
 	public bool Grounded { get { return controller.collisions.below && controller.collisions.fallingThroughPlatform == false; } }
+	public bool LastFrameGrounded { get; private set; }
 	public bool Falling 
 	{ 
 		get 
@@ -44,6 +50,7 @@ public class CharacterController2D : MonoBehaviour
 	}
 
 	public Vector2 Velocity{ get; private set; }
+	public Vector2 LastFrameVelocity { get; private set; }
 	public bool Immobilaze { get; set; }
 
 
@@ -94,11 +101,15 @@ public class CharacterController2D : MonoBehaviour
 			}
 		}
 
-        if (controller.collisions.below)
+        if (LastFrameGrounded == false && Grounded && Immobilaze == false && LastFrameVelocity.y < -2f)
         {
+			Debug.Log(LastFrameVelocity.y);
 			jumpCount = 0;
+			onLand?.Invoke();
         }
 
+		LastFrameGrounded = Grounded;
+		LastFrameVelocity = Velocity;
 	}
 
 	public void SetDirectionalInput (Vector2 input) {
@@ -127,10 +138,12 @@ public class CharacterController2D : MonoBehaviour
 					velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
 				}
 				jumpCount++;
+				onJump?.Invoke();
 			}
 			else {
 				velocity.y = maxJumpVelocity;
 				jumpCount++;
+				onJump?.Invoke();
 			}
 		}
 	}

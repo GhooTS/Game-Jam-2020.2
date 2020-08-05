@@ -44,6 +44,7 @@ public class Controller2D : RaycastController {
 		if (standingOnPlatform) {
 			collisions.below = true;
 		}
+
 	}
 
 	void HorizontalCollisions(ref Vector2 moveAmount) {
