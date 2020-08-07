@@ -4,5 +4,13 @@
 		<property name="name">
 			<value>Master</value>
 		</property>
+		<relationship name="items">
+			<destination>{11b3a62a-1b6b-46c7-b1b1-93cf0ea60b50}</destination>
+		</relationship>
+	</object>
+	<object class="Tag" id="{11b3a62a-1b6b-46c7-b1b1-93cf0ea60b50}">
+		<property name="name">
+			<value>placeholder</value>
+		</property>
 	</object>
 </objects>

@@ -4,13 +4,16 @@ using System.Collections;
 using UnityEngine.InputSystem.Controls;
 
 [RequireComponent (typeof (CharacterController2D))]
+[RequireComponent (typeof (Health))]
 public class PlayerInput : MonoBehaviour {
 
+	Health health;
 	CharacterController2D player;
 	private Vector2 directionalInput;
 
 	void Start () {
 		player = GetComponent<CharacterController2D> ();
+		health = GetComponent<Health> ();
 	}
 
 	void Update () {
@@ -37,4 +40,14 @@ public class PlayerInput : MonoBehaviour {
 			player.OnJumpInputUp();
         }
     }
+
+	public void ResetLoop(InputAction.CallbackContext ctx)
+	{
+		var control = ctx.control as ButtonControl;
+
+		if (ctx.phase == InputActionPhase.Started && control.wasPressedThisFrame)
+		{
+			health.Kill();
+		}
+	}
 }

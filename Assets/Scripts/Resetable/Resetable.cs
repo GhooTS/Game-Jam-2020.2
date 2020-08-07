@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+﻿using GTVariable;
+using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Video;
 
-public class ObjectRestarter : MonoBehaviour
+
+public class Resetable : MonoBehaviour
 {
     public bool resetPosition = true;
     public UnityEvent onRestard;
@@ -15,8 +18,12 @@ public class ObjectRestarter : MonoBehaviour
         savePosition = transform.position;
     }
 
-    public void Restart()
+
+    [ContextMenu("ResetState")]
+    public void ResetState()
     {
+        if (lockable != null && lockable.IsLock) return;
+
         transform.position = savePosition;
         onRestard?.Invoke();
     }

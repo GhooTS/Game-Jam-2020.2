@@ -38,9 +38,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "New action",
+                    "name": "Lock",
                     "type": "Button",
                     "id": "94e3d281-7984-4eff-9406-4ed390ac560d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Reset Loop",
+                    "type": "Button",
+                    "id": "e812fe65-a832-4ac4-88b5-ac0ce0e6b653",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -208,7 +216,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Mouse & Keyboard",
-                    "action": "New action",
+                    "action": "Lock",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5fa20522-e5fa-4b1d-8ca6-08f25ae9466f",
+                    "path": "<Keyboard>/u",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse & Keyboard",
+                    "action": "Reset Loop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

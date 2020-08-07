@@ -1,6 +1,7 @@
 ﻿using GTVariable;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class TimeController : MonoBehaviour
 {
@@ -14,12 +15,12 @@ public class TimeController : MonoBehaviour
     public bool Counting { get; private set; } = false;
 
 
-    private void OnEnable()
+    private void Start()
     {
-        RestartTimer();
+        ResetTimer();
     }
 
-    public void RestartTimer()
+    public void ResetTimer()
     {
         timeLeft.value = maxTime.value;
     }
@@ -28,9 +29,10 @@ public class TimeController : MonoBehaviour
     {
         Counting = true;
         timeStarted?.Invoke();
+        Debug.Log("Start time");
     }
 
-    public void StopCountDown()
+    public void StopTime()
     {
         Counting = false;
         timeStoped?.Invoke();

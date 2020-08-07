@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Events;
+using GTVariable;
 
 [RequireComponent (typeof (Controller2D))]
 public class CharacterController2D : MonoBehaviour 
@@ -11,11 +12,10 @@ public class CharacterController2D : MonoBehaviour
 	public float accelerationTimeAirborne = .02f;
 	[Range(0f,.1f)]
 	public float accelerationTimeGrounded = .01f;
-	public float moveSpeed = 6;
+	public FloatReference moveSpeed;
 
 	[Header("Jumping")]
-	[Min(0)]
-	public int maxJump = 2;
+	public IntReference maxJump;
 	public float maxJumpHeight = 4;
 	public float minJumpHeight = 1;
 	public float timeToJumpApex = .4f;
@@ -103,7 +103,6 @@ public class CharacterController2D : MonoBehaviour
 
         if (LastFrameGrounded == false && Grounded && Immobilaze == false && LastFrameVelocity.y < -2f)
         {
-			Debug.Log(LastFrameVelocity.y);
 			jumpCount = 0;
 			onLand?.Invoke();
         }

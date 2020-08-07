@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public class CharacterAudioController : MonoBehaviour
 {
@@ -6,7 +7,6 @@ public class CharacterAudioController : MonoBehaviour
     public void PlaySound(string path)
     {
         FMODUnity.RuntimeManager.PlayOneShot(path, transform.position);
-        Debug.Log($"Play sound {path}");
     }
 
     public void PlayFootstepSound(string path)
