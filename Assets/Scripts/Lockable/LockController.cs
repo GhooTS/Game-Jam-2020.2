@@ -45,6 +45,15 @@ public class LockController : MonoBehaviour
         }
     }
 
+    public void ReleaseLock()
+    {
+        foreach (var lockable in lockables)
+        {
+            lockable.Unlock();
+        }
+
+        lockables.Clear();
+    }
 
     public void SwitchLock(InputAction.CallbackContext ctx)
     {

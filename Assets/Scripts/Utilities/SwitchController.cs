@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using FMODUnity;
+using UnityEngine;
 using UnityEngine.Events;
+
 
 public class SwitchController : MonoBehaviour
 {
@@ -10,12 +12,12 @@ public class SwitchController : MonoBehaviour
     [Header("Events")]
     public UnityEvent onTurnOn;
     public UnityEvent onTurnOff;
+    public UnityEvent onSetInitalState;
 
 
     private void Start()
     {
-        if (switchOn) TurnOn();
-        else TurnOff();
+        SetInitalState();
     }
 
     public void TurnOn()
@@ -49,4 +51,10 @@ public class SwitchController : MonoBehaviour
 
         switchOn = !switchOn;
     }
+
+    public void SetInitalState()
+    {
+        onSetInitalState?.Invoke();
+    }
+
 }

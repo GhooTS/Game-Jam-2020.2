@@ -1,6 +1,6 @@
 ﻿using GTVariable;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider2D))]
 public class GameController : MonoBehaviour
@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour
     public Collider2D[] loopTriggers;
     public Transform startPoint;
     public bool LoopActive { get; private set; }
+    public BoolVariable loopActive;
+    public UnityEvent onGameStarted;
 
 
     private void OnEnable()
@@ -26,6 +28,7 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
+        loopActive.value = LoopActive;
         if(player.Alive == false)
         {
             ResetLoop();

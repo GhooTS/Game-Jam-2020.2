@@ -78,7 +78,12 @@ public class CharacterController2D : MonoBehaviour
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (gravity) * minJumpHeight);
 	}
 
-	void FixedUpdate() {
+    private void OnDisable()
+    {
+		velocity = Vector2.zero;
+    }
+
+    void FixedUpdate() {
 
 		CalculateVelocity ();
 		HandleWallSliding ();
@@ -103,7 +108,7 @@ public class CharacterController2D : MonoBehaviour
 
         if (LastFrameGrounded == false && Grounded && Immobilaze == false && LastFrameVelocity.y < -2f)
         {
-			jumpCount = 0;
+			ResetJumpCount();
 			onLand?.Invoke();
         }
 
@@ -160,9 +165,9 @@ public class CharacterController2D : MonoBehaviour
 		if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0) {
 			wallSliding = true;
 
-			if (velocity.y < -wallSlideSpeedMax) {
-				velocity.y = -wallSlideSpeedMax;
-			}
+			//if (velocity.y < -wallSlideSpeedMax) {
+			//	velocity.y = -wallSlideSpeedMax;
+			//}
 
 			if (timeToWallUnstick > 0) {
 				velocityXSmoothing = 0;
@@ -182,6 +187,11 @@ public class CharacterController2D : MonoBehaviour
 		}
 
 	}
+
+	public void ResetJumpCount()
+    {
+		jumpCount = 0;
+    }
 
 	void CalculateVelocity() {
 		float targetVelocityX = directionalInput.x * moveSpeed;
