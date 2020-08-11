@@ -21,12 +21,11 @@ public class AttackController : MonoBehaviour
         flip = Animator.StringToHash("Flip");
     }
 
-    public void Attack(InputAction.CallbackContext ctx)
+    public void Attack()
     {
         if (animator.GetBool(dead)) return;
-        var button = ctx.control as ButtonControl;
 
-        if (ctx.phase == InputActionPhase.Started && button.wasPressedThisFrame && animator.GetCurrentAnimatorStateInfo(0).tagHash != attack)
+        if (animator.GetCurrentAnimatorStateInfo(0).tagHash != attack)
         {
             animator.SetTrigger(attack);
             

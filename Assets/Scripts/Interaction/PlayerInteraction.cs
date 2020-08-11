@@ -56,9 +56,9 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    public void Interact(InputAction.CallbackContext ctx)
+    public void Interact()
     {
-        if(ctx.canceled && ctx.phase == InputActionPhase.Canceled && interactable != null)
+        if(interactable != null)
         {
             interactable.Interact();
             onInteracted?.Invoke();

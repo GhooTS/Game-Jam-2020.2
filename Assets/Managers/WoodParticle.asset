@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40a1ff6b1bd2deb49887b293afb1e547, type: 3}
-  m_Name: LoopActive
+  m_Script: {fileID: 11500000, guid: 34ae0f330d4f4b44fb38947e835c7e18, type: 3}
+  m_Name: WoodParticle
   m_EditorClassIdentifier: 
-  description: 
-  value: 1
+  prefab: {fileID: 2760482934637637400, guid: a1f9c8cebd633f64f895033574776339, type: 3}

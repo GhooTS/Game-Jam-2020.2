@@ -7,12 +7,16 @@ public class Lockable : MonoBehaviour
     public bool IsLock { get; private set; }
     public UnityEvent onLock;
     public UnityEvent onUnlock;
+    new public SpriteRenderer renderer;
+    public Material normal;
+    public Material locked;
 
     public void Lock()
     {
         if (interactionEnabled == false) return;
 
         IsLock = true;
+        renderer.material = locked;
         onLock?.Invoke();
     }
 
@@ -21,6 +25,7 @@ public class Lockable : MonoBehaviour
         if (interactionEnabled == false) return;
 
         IsLock = false;
+        renderer.material = normal;
         onUnlock?.Invoke();
     }
 

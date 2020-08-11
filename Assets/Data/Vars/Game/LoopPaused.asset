@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40a1ff6b1bd2deb49887b293afb1e547, type: 3}
-  m_Name: LoopActive
+  m_Name: LoopPaused
   m_EditorClassIdentifier: 
   description: 
   value: 1

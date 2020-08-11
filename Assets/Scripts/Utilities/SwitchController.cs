@@ -2,59 +2,47 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-
-public class SwitchController : MonoBehaviour
+public class SwitchController : Switchable
 {
-    [SerializeField]
-    private bool switchOn = false;
-    public bool invert = false;
-    public SwitchController[] switches;
+    public Sprite onSprite;
+    public Sprite offSprite;
+    public SpriteRenderer spriteRenderer;
     [Header("Events")]
     public UnityEvent onTurnOn;
     public UnityEvent onTurnOff;
-    public UnityEvent onSetInitalState;
+    public UnityEvent onSetInitialState;
 
+    public bool SwitchOn { get; private set; }
 
     private void Start()
     {
-        SetInitalState();
+        SetInitialState();
     }
 
-    public void TurnOn()
+    public override void Switch()
     {
-        onTurnOn?.Invoke();
-        foreach (var switchController in switches)
-        {
-            switchController.TurnOn();
-        }
+        Switch(!SwitchOn);
     }
 
-    public void TurnOff()
+    public override void Switch(bool switchOn)
     {
-        onTurnOff?.Invoke();
-        foreach (var switchController in switches)
+        spriteRenderer.sprite = switchOn ? onSprite : offSprite;
+        if (switchOn)
         {
-            switchController.TurnOff();
-        }
-    }
-
-    public void Switch()
-    {
-        if (switchOn == !invert)
-        {
-            TurnOff();
+            onTurnOn?.Invoke();
         }
         else
         {
-            TurnOn();
+            onTurnOff?.Invoke();
         }
-
-        switchOn = !switchOn;
+        SwitchOn = switchOn;
     }
 
-    public void SetInitalState()
+    public override void SetInitialState()
     {
-        onSetInitalState?.Invoke();
+        spriteRenderer.sprite = defualtState ? onSprite : offSprite;
+        SwitchOn = defualtState;
+        onSetInitialState?.Invoke();
     }
 
 }

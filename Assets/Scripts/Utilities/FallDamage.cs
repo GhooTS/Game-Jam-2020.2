@@ -4,9 +4,9 @@
 [RequireComponent(typeof(CharacterController2D))]
 public class FallDamage : MonoBehaviour
 {
-    [Min(1f)]
+    [Min(0f)]
     public float timeThreshold;
-    [Min(1f)]
+    [Min(0f)]
     public float maxTime;
     [Min(0f)]
     public float maxDamage;

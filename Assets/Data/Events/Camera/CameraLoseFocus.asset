@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40a1ff6b1bd2deb49887b293afb1e547, type: 3}
-  m_Name: LoopActive
+  m_Script: {fileID: 11500000, guid: a59bf6d4b66e34f49ad675d44ee54cf6, type: 3}
+  m_Name: CameraLoseFocus
   m_EditorClassIdentifier: 
   description: 
-  value: 1

@@ -86,7 +86,7 @@ public class CharacterController2D : MonoBehaviour
     void FixedUpdate() {
 
 		CalculateVelocity ();
-		HandleWallSliding ();
+		//HandleWallSliding ();
 
 
 		if (Immobilaze) 
@@ -165,11 +165,12 @@ public class CharacterController2D : MonoBehaviour
 		if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0) {
 			wallSliding = true;
 
-			//if (velocity.y < -wallSlideSpeedMax) {
-			//	velocity.y = -wallSlideSpeedMax;
-			//}
+            if (velocity.y < -wallSlideSpeedMax)
+            {
+                velocity.y = -wallSlideSpeedMax;
+            }
 
-			if (timeToWallUnstick > 0) {
+            if (timeToWallUnstick > 0) {
 				velocityXSmoothing = 0;
 				velocity.x = 0;
 

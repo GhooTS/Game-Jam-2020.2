@@ -3,18 +3,16 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Video;
 
-
 public class Resetable : MonoBehaviour
 {
     public bool resetPosition = true;
+    public Lockable lockable;
     public UnityEvent onRestard;
 
-    private Lockable lockable;
     private Vector3 savePosition;
 
     private void Start()
     {
-        lockable = GetComponent<Lockable>();
         savePosition = transform.position;
     }
 
